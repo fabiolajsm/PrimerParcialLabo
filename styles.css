@@ -1,3 +1,4 @@
+/*  Estilos Form Datos */
 #contenedorElementos {
   max-width: 800px;
   margin: 0 auto;
@@ -96,4 +97,67 @@ table th button {
 #contenedorPromedio button:hover {
   background-color: #006ba6;
   color: #b3dee2;
+}
+
+/* Estilos Form ABM */
+#formularioABM {
+  display: none;
+  background-color: #fff0f3;
+  border: 1px solid #590d22;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#formularioABM h1 {
+  color: #590d22;
+  text-align: center;
+}
+
+#formularioABM label {
+  color: #590d22;
+  display: block;
+  margin-top: 10px;
+}
+
+#formularioABM select,
+#formularioABM input[type="number"],
+#formularioABM input[type="text"] {
+  width: 100%;
+  padding: 5px;
+  margin-top: 5px;
+  border: 1px solid #590d22;
+  border-radius: 5px;
+}
+
+#formularioABM .errorInput {
+  color: #ff0000;
+}
+
+#accionesABM {
+  text-align: center; 
+}
+
+#accionesABM button {
+  background-color: #590d22;
+  color: #fff0f3;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-top: 10px;
+  cursor: pointer;
+  margin-right: 10px; 
+  display: inline-block; 
+}
+
+#accionesABM button:last-child {
+  margin-right: 0; 
+}
+
+#accionesABM button:hover {
+  background-color: #fff0f3;
+  color: #590d22;
 }

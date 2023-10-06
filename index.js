@@ -171,3 +171,16 @@ function calcularPromedioVelMax() {
 }
 
 mostrarElementosEnFormDatos(listaElementos);
+
+const tablaElementos = document.getElementById("elementos");
+tablaElementos.addEventListener("dblclick", mostrarFormABM);
+function mostrarFormABM() {
+  document.getElementById("contenedorElementos").style.display = "none";
+  const formularioABM = document.getElementById("formularioABM");
+  formularioABM.style.display = "block";
+}
+function cerrarFormABM() {
+  const formularioABM = document.getElementById("formularioABM");
+  formularioABM.style.display = "none";
+  document.getElementById("contenedorElementos").style.display = "block";
+}
