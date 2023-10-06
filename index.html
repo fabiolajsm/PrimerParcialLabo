@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Primer Parcial Labo III</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="index.js" defer></script>
+  </head>
+
+  <body>
+    <div id="contenedorElementos">
+      <h1>Form Datos</h1>
+      <label for="FiltrarPor">Filtrar por:</label>
+      <select id="filtroPorTipo" title="filtroPorTipo" onchange="handleFiltroPorTipo()">
+        <option selected value="Todos">Todos</option>
+        <option value="Terrestre">Terrestre</option>
+        <option value="Aereo">Aereo</option>
+      </select>
+
+      <div id="checkbox">
+        <input type="checkbox" id="idCb" name="idCb" value="id" />
+        <label for="idCb">ID</label>
+
+        <input type="checkbox" id="modeloCb" name="modeloCb" value="modelo" />
+        <label for="modeloCb">Modelo</label>
+
+        <input type="checkbox" id="anoFabCb" name="anoFabCb" value="anoFab" />
+        <label for="anoFabCb">Año de Fabricación</label>
+
+        <input type="checkbox" id="velMaxCb" name="velMaxCb" value="velMax" />
+        <label for="velMaxCb">Velocidad Máxima</label>
+
+        <input type="checkbox" id="altMaxCb" name="altMaxCb" value="altMax" />
+        <label for="altMaxCb">Altitud Máxima</label>
+
+        <input
+          type="checkbox"
+          id="autonomiaCb"
+          name="autonomiaCb"
+          value="autonomia"
+        />
+        <label for="autonomiaCb">Autonomía</label>
+
+        <input
+          type="checkbox"
+          id="cantPueCb"
+          name="cantPueCb"
+          value="cantPue"
+        />
+        <label for="cantPueCb">Cantidad de Puertas</label>
+
+        <input
+          type="checkbox"
+          id="cantRueCb"
+          name="cantRueCb"
+          value="cantRue"
+        />
+        <label for="cantRueCb">Cantidad de Ruedas</label>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th><button id="btnID">ID</button></th>
+            <th><button id="btnModelo">Modelo</button></th>
+            <th><button id="btnAnoFab">Año de fabricación</button></th>
+            <th><button id="btnVelMax">Velocidad Máxima</button></th>
+            <th><button id="btnAltMax">Altura Máxima</button></th>
+            <th><button id="btnAutonomia">Autonomia</button></th>
+            <th><button id="btnCantPue">Cantidad de Puertas</button></th>
+            <th><button id="btnCantRue">Cantidad de Ruedas</button></th>
+          </tr>
+        </thead>
+        <tbody id="elementos">
+          <!-- Los elementos se agregarán aquí -->
+        </tbody>
+      </table>
+      <button id="btnAgregarElemento" type="submit">Agregar Elemento</button>
+    </div>
+
+    <form id="formularioABM" style="display: none">
+      <h1 id="tituloABM">Form ABM</h1>
+      <label for="id">ID:</label>
+      <input type="number" id="id" name="id" required maxlength="50" />
+      <label for="modelo">Modelo:</label>
+      <input type="text" id="modelo" name="modelo" required maxlength="50" />
+
+      <label for="anoFab">Año de fabricación:</label>
+      <input
+        type="number"
+        id="anoFab"
+        name="anoFab"
+        required
+        min="1885"
+        step="1885"
+      />
+      <label for="velMax">Velocidad Máxima:</label>
+      <input
+        type="number"
+        id="velMax"
+        name="velMax"
+        required
+        min="0"
+        step="1"
+      />
+      <label for="tipo">Tipo:</label>
+      <select id="tipo" title="tipo">
+        <option selected value="Todos">Todos</option>
+        <option value="Terrestre">Terrestre</option>
+        <option value="Aereo">Aereo</option>
+      </select>
+
+      <label for="altMax">Altura Máxima:</label>
+      <input
+        type="number"
+        id="altMax"
+        name="altMax"
+        required
+        min="1"
+        step="1"
+      />
+      <label for="errorAltMax" class="errorInput" style="display: none"
+        >⚠️ Altura máxima inválida</label
+      >
+      <br />
+
+      <label for="autonomia">Autonomía</label>
+      <input
+        type="number"
+        id="autonomia"
+        name="autonomia"
+        required
+        min="1"
+        step="1"
+      />
+      <label for="errorAutonomia" class="errorInput" style="display: none"
+        >⚠️ Autonomía inválida</label
+      >
+      <br />
+
+      <label for="cantPue">Cantidad Puertas:</label>
+      <input
+        type="number"
+        id="cantPue"
+        name="cantPue"
+        required
+        min="0"
+        step="1"
+      />
+      <label for="errorCantPue" class="errorInput" style="display: none"
+        >⚠️ Cantidad de puertas inválida</label
+      >
+      <br />
+
+      <label for="cantRue">Cantidad Ruedas:</label>
+      <input
+        type="number"
+        id="cantRue"
+        name="cantRue"
+        required
+        min="1"
+        step="1"
+      />
+      <label for="errorCantRue" class="errorInput" style="display: none"
+        >⚠️ Cantidad de ruedas inválida</label
+      >
+      <br />
+
+      <div id="accionesABM">
+        <button id="btnAgregarABM">Agregar</button>
+        <button id="btnModificarABM">Modificar</button>
+        <button id="btnEliminarABM">Eliminar</button>
+        <button id="btnCancelarABM">Cancelar</button>
+      </div>
+    </form>
+  </body>
+</html>

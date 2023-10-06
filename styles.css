@@ -1,0 +1,66 @@
+#contenedorElementos {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+#filtroPorTipo {
+  padding: 5px;
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+label {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+input[type="checkbox"] {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th,
+td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+table th button {
+  background-color: #fff0f3;
+  color: #590d22;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+#btnAgregarElemento {
+  background-color: #590d22;
+  color: #fff0f3;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+#btnAgregarElemento:hover {
+  background-color: #fff0f3;
+  color: #590d22;
+}
+
+.errorInput {
+  color: red;
+}
