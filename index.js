@@ -172,15 +172,86 @@ function calcularPromedioVelMax() {
 
 mostrarElementosEnFormDatos(listaElementos);
 
+/**d) mostrar el “Formulario ABM”
+ * con los datos de la fila o vacío según
+ * corresponda (ocultar los botones que correspondan). */
+// Agrega eventos de doble clic a las filas de la tabla
 const tablaElementos = document.getElementById("elementos");
-tablaElementos.addEventListener("dblclick", mostrarFormABM);
-function mostrarFormABM() {
-  document.getElementById("contenedorElementos").style.display = "none";
+tablaElementos.addEventListener("dblclick", mostrarFormularioABM);
+const btnAgregarElemento = document.getElementById("btnAgregarElemento");
+btnAgregarElemento.addEventListener("click", mostrarFormularioABMVacio);
+
+function mostrarFormularioABM(event) {
+  if (event.target.tagName !== "TD") {
+    return;
+  }
+  const fila = event.target.parentNode;
+  const id = fila.children[0].textContent;
+  const modelo = fila.children[1].textContent;
+  const anoFab = fila.children[2].textContent;
+  const velMax = fila.children[3].textContent;
+  const altMax = fila.children[4].textContent;
+  const autonomia = fila.children[5].textContent;
+  const cantPue = fila.children[6].textContent;
+  const cantRue = fila.children[7].textContent;
+
+  mostrarFormularioABM(
+    id,
+    modelo,
+    anoFab,
+    velMax,
+    altMax,
+    autonomia,
+    cantPue,
+    cantRue
+  );
+}
+
+function mostrarFormularioABMVacio() {
+  mostrarFormularioABM("", "", "", "", "", "", "", "");
+}
+
+function mostrarFormularioABM(
+  id,
+  modelo,
+  anoFab,
+  velMax,
+  altMax,
+  autonomia,
+  cantPue,
+  cantRue
+) {
+  const contenedorElementos = document.getElementById("contenedorElementos");
+  contenedorElementos.style.display = "none";
   const formularioABM = document.getElementById("formularioABM");
   formularioABM.style.display = "block";
+
+  document.getElementById("id").value = id;
+  document.getElementById("modelo").value = modelo;
+  document.getElementById("anoFab").value = anoFab;
+  document.getElementById("velMax").value = velMax;
+  document.getElementById("altMax").value = altMax;
+  document.getElementById("autonomia").value = autonomia;
+  document.getElementById("cantPue").value = cantPue;
+  document.getElementById("cantRue").value = cantRue;
+
+  const btnAgregarABM = document.getElementById("btnAgregarABM");
+  const btnModificarABM = document.getElementById("btnModificarABM");
+  const btnEliminarABM = document.getElementById("btnEliminarABM");
+  if (id === "") {
+    btnAgregarABM.style.display = "block";
+    btnModificarABM.style.display = "none";
+    btnEliminarABM.style.display = "none";
+  } else {
+    btnAgregarABM.style.display = "none";
+    btnModificarABM.style.display = "block";
+    btnEliminarABM.style.display = "block";
+  }
 }
+
 function cerrarFormABM() {
   const formularioABM = document.getElementById("formularioABM");
   formularioABM.style.display = "none";
-  document.getElementById("contenedorElementos").style.display = "block";
+  const contenedorElementos = document.getElementById("contenedorElementos");
+  contenedorElementos.style.display = "block";
 }
