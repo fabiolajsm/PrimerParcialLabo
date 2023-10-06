@@ -150,4 +150,24 @@ function handleFiltroPorTipo() {
   mostrarElementosEnFormDatos(elementosFiltrados);
 }
 
+function calcularPromedioVelMax() {
+  const inputPromedio = document.getElementById("promedioVelMax");
+  const filtroPorTipo = document.getElementById("filtroPorTipo").value;
+
+  const elementosFiltrados = listaElementos.filter((elemento) => {
+    return (
+      filtroPorTipo === "Todos" ||
+      (filtroPorTipo === "Terrestre" && elemento instanceof Terrestre) ||
+      (filtroPorTipo === "Aereo" && elemento instanceof Aereo)
+    );
+  });
+
+  const promedio =
+    elementosFiltrados.reduce((total, elemento) => {
+      return total + elemento.velMax;
+    }, 0) / elementosFiltrados.length;
+  inputPromedio.value = promedio.toFixed(2);
+  inputPromedio.style.fontWeight = 600;
+}
+
 mostrarElementosEnFormDatos(listaElementos);

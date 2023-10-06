@@ -13,7 +13,11 @@
     <div id="contenedorElementos">
       <h1>Form Datos</h1>
       <label for="FiltrarPor">Filtrar por:</label>
-      <select id="filtroPorTipo" title="filtroPorTipo" onchange="handleFiltroPorTipo()">
+      <select
+        id="filtroPorTipo"
+        title="filtroPorTipo"
+        onchange="handleFiltroPorTipo()"
+      >
         <option selected value="Todos">Todos</option>
         <option value="Terrestre">Terrestre</option>
         <option value="Aereo">Aereo</option>
@@ -58,6 +62,19 @@
           value="cantRue"
         />
         <label for="cantRueCb">Cantidad de Ruedas</label>
+      </div>
+
+      <div id="contenedorPromedio">
+        <label for="promedioVelMax">Promedio Velocidad Máxima:</label>
+        <input
+          type="number"
+          id="promedioVelMax"
+          name="promedioVelMax"
+          disabled
+        />
+        <button id="btnCalcularPromedio" onclick="calcularPromedioVelMax()">
+          Calcular
+        </button>
       </div>
 
       <table>
