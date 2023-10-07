@@ -191,7 +191,6 @@ tablaElementos.addEventListener("dblclick", (event) =>
 );
 
 function mostrarFormularioABM(event) {
-
   if (event.target.tagName !== "TD") {
     return;
   }
@@ -282,6 +281,9 @@ function handleMostrarPorTipo() {
   const autLabel = document.querySelector('label[for="autonomia"]');
   const cantPueLabel = document.querySelector('label[for="cantPue"]');
   const cantRueLabel = document.querySelector('label[for="cantRue"]');
+  const errorTipo = document.querySelector('label[for="errorTipo"]');
+
+  errorTipo.style.display = "none";
   altLabel.style.display = "none";
   autLabel.style.display = "none";
   cantPueLabel.style.display = "none";
