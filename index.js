@@ -384,48 +384,6 @@ function validarCampos() {
   return esValido;
 }
 
-function mostrarInputsTipo() {
-  const nombreInput = document.getElementById("nombre");
-  const apellidoInput = document.getElementById("apellido");
-  const edadInput = document.getElementById("edad");
-
-  idInput.value = elemento.id;
-  nombreInput.value = elemento.nombre || "";
-  apellidoInput.value = elemento.apellido || "";
-  edadInput.value = elemento.edad || "";
-
-  const camposAMostrar =
-    elemento instanceof Cliente
-      ? ["compras", "telefono"]
-      : ["sueldo", "ventas"];
-  const camposAOcultar =
-    elemento instanceof Cliente
-      ? ["sueldo", "ventas"]
-      : ["compras", "telefono"];
-
-  camposAMostrar.forEach((campo) => {
-    const label = document.querySelector(`label[for="${campo}"]`);
-    const input = document.getElementById(campo);
-    label.style.display = "block";
-    input.style.display = "block";
-    input.setAttribute(
-      "required",
-      tipoAccion === "Modificar" ? "required" : null
-    );
-    input.value = elemento[campo] || "";
-    input.disabled = tipoAccion === "Eliminar";
-  });
-
-  camposAOcultar.forEach((campo) => {
-    const label = document.querySelector(`label[for="${campo}"]`);
-    const input = document.getElementById(campo);
-    label.style.display = "none";
-    input.style.display = "none";
-    input.value = "";
-    input.disabled = tipoAccion === "Eliminar";
-  });
-}
-
 function modificarElemento() {
   const id = document.getElementById("id").value;
   const modelo = document.getElementById("modelo").value;
