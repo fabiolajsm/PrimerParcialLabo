@@ -279,11 +279,11 @@ function handleMostrarPorTipo() {
   const tipo = document.getElementById("tipo").value;
   const altMaxField = document.getElementById("altMax");
   const autonomiaField = document.getElementById("autonomia");
-  const cantPueField = document.getElementById("cantRue");
+  const cantPueField = document.getElementById("cantPue");
   const cantRueField = document.getElementById("cantRue");
   const altLabel = document.querySelector('label[for="altMax"]');
   const autLabel = document.querySelector('label[for="autonomia"]');
-  const cantPueLabel = document.querySelector('label[for="cantRue"]');
+  const cantPueLabel = document.querySelector('label[for="cantPue"]');
   const cantRueLabel = document.querySelector('label[for="cantRue"]');
   altLabel.style.display = "none";
   autLabel.style.display = "none";
