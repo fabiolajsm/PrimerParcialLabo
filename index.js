@@ -26,6 +26,19 @@ class Terrestre extends Vehiculo {
   }
 }
 
+class Elemento {
+  constructor(id, modelo, anoFab, velMax, altMax, autonomia, cantPue, cantRue) {
+    this.id = id;
+    this.modelo = modelo;
+    this.anoFab = anoFab;
+    this.velMax = velMax;
+    this.altMax = altMax;
+    this.autonomia = autonomia;
+    this.cantPue = cantPue;
+    this.cantRue = cantRue;
+  }
+}
+
 let listaElementos = [
   {
     id: 14,
@@ -254,4 +267,201 @@ function cerrarFormABM() {
   formularioABM.style.display = "none";
   const contenedorElementos = document.getElementById("contenedorElementos");
   contenedorElementos.style.display = "block";
+}
+
+function generarID() {
+  const timestamp = new Date().getTime();
+  const random = Math.floor(Math.random() * 1000);
+  return `${timestamp}${random}`;
+}
+
+function handleMostrarPorTipo() {
+  const tipo = document.getElementById("tipo").value;
+  const altMaxField = document.getElementById("altMax");
+  const autonomiaField = document.getElementById("autonomia");
+  const cantPueField = document.getElementById("cantRue");
+  const cantRueField = document.getElementById("cantRue");
+  const altLabel = document.querySelector('label[for="altMax"]');
+  const autLabel = document.querySelector('label[for="autonomia"]');
+  const cantPueLabel = document.querySelector('label[for="cantRue"]');
+  const cantRueLabel = document.querySelector('label[for="cantRue"]');
+  altLabel.style.display = "none";
+  autLabel.style.display = "none";
+  cantPueLabel.style.display = "none";
+  cantRueLabel.style.display = "none";
+
+  altMaxField.style.display = "none";
+  autonomiaField.style.display = "none";
+  cantPueField.style.display = "none";
+  cantRueField.style.display = "none";
+  if (tipo === "Aereo") {
+    altLabel.style.display = "block";
+    autLabel.style.display = "block";
+    altMaxField.style.display = "block";
+    autonomiaField.style.display = "block";
+  } else if (tipo === "Terrestre") {
+    cantPueLabel.style.display = "block";
+    cantRueLabel.style.display = "block";
+    cantPueField.style.display = "block";
+    cantRueField.style.display = "block";
+  }
+}
+
+function agregarElemento() {
+  if (validarCampos()) {
+    const id = generarID();
+    const modelo = document.getElementById("modelo").value;
+    const anoFab = document.getElementById("anoFab").value;
+    const velMax = document.getElementById("velMax").value;
+    const altMax = document.getElementById("altMax").value;
+    const autonomia = document.getElementById("autonomia").value;
+    const cantPue = document.getElementById("cantPue").value;
+    const cantRue = document.getElementById("cantRue").value;
+    const nuevoElemento = null;
+    if (altMax) {
+      nuevoElemento = new Aereo(id, modelo, anoFab, velMax, altMax, autonomia);
+    } else {
+      nuevoElemento = new Terrestre(
+        id,
+        modelo,
+        anoFab,
+        velMax,
+        cantPue,
+        cantRue
+      );
+    }
+
+    if (nuevoElemento != null) {
+      listaElementos.push(nuevoElemento);
+    }
+    actualizarFormDatos();
+  }
+}
+function validarCampos() {
+  let esValido = true;
+  const tipo = document.getElementById("tipo").value;
+  const cantPue = document.getElementById("cantPue").value;
+  const cantRue = document.getElementById("cantRue").value;
+  const errorTipo = document.querySelector('label[for="errorTipo"]');
+  const errorPue = document.querySelector('label[for="errorCantPue"]');
+  const errorRue = document.querySelector('label[for="errorCantRue"]');
+  //Aereo
+  const altMax = document.getElementById("altMax").value;
+  const errorAltMax = document.getElementById("errorAltMax").value;
+
+  const autonomia = document.getElementById("autonomia").value;
+  const errorAutonomia = document.querySelector('label[for="errorAutonomia"]');
+
+  errorTipo.style.display = "none";
+  errorRue.style.display = "none";
+  errorPue.style.display = "none";
+  errorAltMax.style.display = "none";
+  errorAutonomia.style.display = "none";
+
+  if (tipo !== "Terrestre" || tipo !== "Aereo") {
+    errorTipo.style.display = "block";
+  }
+  if (tipo === "Terrestre") {
+    if (isNaN(cantRue) || cantRue < -1) {
+      errorRue.style.display = "block";
+      esValido = false;
+    }
+    if (isNaN(cantPue) || cantPue < 0) {
+      errorPue.style.display = "block";
+      esValido = false;
+    }
+  }
+  if (tipo === "Aereo") {
+    if (isNaN(altMax) || altMax < 1) {
+      errorAltMax.style.display = "block";
+      esValido = false;
+    }
+    if (isNaN(autonomia) || autonomia < 1) {
+      errorAutonomia.style.display = "block";
+      esValido = false;
+    }
+  }
+  return esValido;
+}
+
+function mostrarInputsTipo() {
+  const nombreInput = document.getElementById("nombre");
+  const apellidoInput = document.getElementById("apellido");
+  const edadInput = document.getElementById("edad");
+
+  idInput.value = elemento.id;
+  nombreInput.value = elemento.nombre || "";
+  apellidoInput.value = elemento.apellido || "";
+  edadInput.value = elemento.edad || "";
+
+  const camposAMostrar =
+    elemento instanceof Cliente
+      ? ["compras", "telefono"]
+      : ["sueldo", "ventas"];
+  const camposAOcultar =
+    elemento instanceof Cliente
+      ? ["sueldo", "ventas"]
+      : ["compras", "telefono"];
+
+  camposAMostrar.forEach((campo) => {
+    const label = document.querySelector(`label[for="${campo}"]`);
+    const input = document.getElementById(campo);
+    label.style.display = "block";
+    input.style.display = "block";
+    input.setAttribute(
+      "required",
+      tipoAccion === "Modificar" ? "required" : null
+    );
+    input.value = elemento[campo] || "";
+    input.disabled = tipoAccion === "Eliminar";
+  });
+
+  camposAOcultar.forEach((campo) => {
+    const label = document.querySelector(`label[for="${campo}"]`);
+    const input = document.getElementById(campo);
+    label.style.display = "none";
+    input.style.display = "none";
+    input.value = "";
+    input.disabled = tipoAccion === "Eliminar";
+  });
+}
+
+function modificarElemento() {
+  const id = document.getElementById("id").value;
+  const modelo = document.getElementById("modelo").value;
+  const anoFab = document.getElementById("anoFab").value;
+  const velMax = document.getElementById("velMax").value;
+  const altMax = document.getElementById("altMax").value;
+  const autonomia = document.getElementById("autonomia").value;
+  const cantPue = document.getElementById("cantPue").value;
+  const cantRue = document.getElementById("cantRue").value;
+
+  // Busca el elemento correspondiente en la lista y actualiza sus propiedades
+  const elementoExistente = listaElementos.find(
+    (elemento) => elemento.id === id
+  );
+  if (elementoExistente) {
+    elementoExistente.modelo = modelo;
+    elementoExistente.anoFab = anoFab;
+    elementoExistente.velMax = velMax;
+    elementoExistente.altMax = altMax;
+    elementoExistente.autonomia = autonomia;
+    elementoExistente.cantPue = cantPue;
+    elementoExistente.cantRue = cantRue;
+
+    actualizarFormDatos();
+  }
+}
+
+function eliminarElemento() {
+  const id = document.getElementById("id").value;
+
+  // Filtra la lista para eliminar el elemento correspondiente
+  listaElementos = listaElementos.filter((elemento) => elemento.id !== id);
+  actualizarFormDatos();
+}
+
+function actualizarFormDatos() {
+  mostrarElementosEnFormDatos(listaElementos);
+  cerrarFormABM();
 }

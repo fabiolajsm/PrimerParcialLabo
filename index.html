@@ -94,13 +94,15 @@
           <!-- Los elementos se agregarán aquí -->
         </tbody>
       </table>
-      <button id="btnAgregarElemento" onclick="mostrarFormularioABMVacio()">Agregar</button>
+      <button id="btnAgregarElemento" onclick="mostrarFormularioABMVacio()">
+        Agregar
+      </button>
     </div>
 
     <form id="formularioABM" style="display: none">
       <h1 id="tituloABM">Form ABM</h1>
       <label for="id">ID:</label>
-      <input type="number" id="id" name="id" required maxlength="50" />
+      <input type="number" id="id" name="id" disabled maxlength="50" />
       <label for="modelo">Modelo:</label>
       <input type="text" id="modelo" name="modelo" required maxlength="50" />
 
@@ -123,14 +125,18 @@
         step="1"
       />
       <label for="tipo">Tipo:</label>
-      <select id="tipo" title="tipo">
-        <option selected value="Todos">Todos</option>
+      <select id="tipo" title="tipo" onchange="handleMostrarPorTipo()">
+        <option selected disabled value="default">Seleccione una opción</option>
         <option value="Terrestre">Terrestre</option>
         <option value="Aereo">Aereo</option>
       </select>
-
-      <label for="altMax">Altura Máxima:</label>
+      <label for="errorTipo" class="errorInput" style="display: none"
+        >⚠️ Error en el tipo seleccionado</label
+      >
+      <br />
+      <label for="altMax" style="display: none">Altura Máxima:</label>
       <input
+        style="display: none"
         type="number"
         id="altMax"
         name="altMax"
@@ -143,8 +149,9 @@
       >
       <br />
 
-      <label for="autonomia">Autonomía</label>
+      <label for="autonomia" style="display: none">Autonomía</label>
       <input
+        style="display: none"
         type="number"
         id="autonomia"
         name="autonomia"
@@ -157,8 +164,9 @@
       >
       <br />
 
-      <label for="cantPue">Cantidad Puertas:</label>
+      <label for="cantPue" style="display: none">Cantidad Puertas:</label>
       <input
+        style="display: none"
         type="number"
         id="cantPue"
         name="cantPue"
@@ -171,8 +179,9 @@
       >
       <br />
 
-      <label for="cantRue">Cantidad Ruedas:</label>
+      <label for="cantRue" style="display: none">Cantidad Ruedas:</label>
       <input
+        style="display: none"
         type="number"
         id="cantRue"
         name="cantRue"
@@ -186,9 +195,13 @@
       <br />
 
       <div id="accionesABM">
-        <button id="btnAgregarABM">Agregar</button>
-        <button id="btnModificarABM">Modificar</button>
-        <button id="btnEliminarABM">Eliminar</button>
+        <button id="btnAgregarABM" onclick="agregarElemento()">Agregar</button>
+        <button id="btnModificarABM" onclick="modificarElemento()">
+          Modificar
+        </button>
+        <button id="btnEliminarABM" onclick="eliminarElemento()">
+          Eliminar
+        </button>
         <button id="btnCancelarABM" onclick="cerrarFormABM()">Cancelar</button>
       </div>
     </form>
