@@ -313,14 +313,17 @@ function agregarElemento() {
     const modelo = document.getElementById("modelo").value;
     const anoFab = document.getElementById("anoFab").value;
     const velMax = document.getElementById("velMax").value;
-    const altMax = document.getElementById("altMax").value;
-    const autonomia = document.getElementById("autonomia").value;
-    const cantPue = document.getElementById("cantPue").value;
-    const cantRue = document.getElementById("cantRue").value;
-    const nuevoElemento = null;
-    if (altMax) {
+    let nuevoElemento = null; // Cambiando de const a let
+
+    const tipo = document.getElementById("tipo").value;
+
+    if (tipo === "Aereo") {
+      const altMax = document.getElementById("altMax").value;
+      const autonomia = document.getElementById("autonomia").value;
       nuevoElemento = new Aereo(id, modelo, anoFab, velMax, altMax, autonomia);
-    } else {
+    } else if (tipo === "Terrestre") {
+      const cantPue = document.getElementById("cantPue").value;
+      const cantRue = document.getElementById("cantRue").value;
       nuevoElemento = new Terrestre(
         id,
         modelo,
@@ -331,12 +334,13 @@ function agregarElemento() {
       );
     }
 
-    if (nuevoElemento != null) {
+    if (nuevoElemento !== null) {
       listaElementos.push(nuevoElemento);
+      actualizarFormDatos();
     }
-    actualizarFormDatos();
   }
 }
+
 function validarCampos() {
   let esValido = true;
   const tipo = document.getElementById("tipo").value;
@@ -345,22 +349,16 @@ function validarCampos() {
   const errorTipo = document.querySelector('label[for="errorTipo"]');
   const errorPue = document.querySelector('label[for="errorCantPue"]');
   const errorRue = document.querySelector('label[for="errorCantRue"]');
-  //Aereo
-  const altMax = document.getElementById("altMax").value;
-  const errorAltMax = document.getElementById("errorAltMax").value;
-
-  const autonomia = document.getElementById("autonomia").value;
-  const errorAutonomia = document.querySelector('label[for="errorAutonomia"]');
 
   errorTipo.style.display = "none";
   errorRue.style.display = "none";
   errorPue.style.display = "none";
-  errorAltMax.style.display = "none";
-  errorAutonomia.style.display = "none";
 
-  if (tipo !== "Terrestre" || tipo !== "Aereo") {
+  if (tipo !== "Terrestre" && tipo !== "Aereo") {
     errorTipo.style.display = "block";
+    esValido = false;
   }
+
   if (tipo === "Terrestre") {
     if (isNaN(cantRue) || cantRue < -1) {
       errorRue.style.display = "block";
@@ -370,8 +368,17 @@ function validarCampos() {
       errorPue.style.display = "block";
       esValido = false;
     }
-  }
-  if (tipo === "Aereo") {
+  } else if (tipo === "Aereo") {
+    const altMax = document.getElementById("altMax").value;
+    const autonomia = document.getElementById("autonomia").value;
+    const errorAltMax = document.querySelector('label[for="errorAltMax"]');
+    const errorAutonomia = document.querySelector(
+      'label[for="errorAutonomia"]'
+    );
+
+    errorAltMax.style.display = "none";
+    errorAutonomia.style.display = "none";
+
     if (isNaN(altMax) || altMax < 1) {
       errorAltMax.style.display = "block";
       esValido = false;
@@ -381,6 +388,7 @@ function validarCampos() {
       esValido = false;
     }
   }
+
   return esValido;
 }
 
