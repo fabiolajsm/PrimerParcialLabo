@@ -185,16 +185,13 @@ function calcularPromedioVelMax() {
 
 mostrarElementosEnFormDatos(listaElementos);
 
-/**d) mostrar el “Formulario ABM”
- * con los datos de la fila o vacío según
- * corresponda (ocultar los botones que correspondan). */
-// Agrega eventos de doble clic a las filas de la tabla
 const tablaElementos = document.getElementById("elementos");
-tablaElementos.addEventListener("dblclick", mostrarFormularioABM);
-const btnAgregarElemento = document.getElementById("btnAgregarElemento");
-btnAgregarElemento.addEventListener("click", mostrarFormularioABMVacio);
+tablaElementos.addEventListener("dblclick", (event) =>
+  mostrarFormularioABM(event)
+);
 
 function mostrarFormularioABM(event) {
+
   if (event.target.tagName !== "TD") {
     return;
   }
@@ -421,8 +418,6 @@ function modificarElemento() {
 
 function eliminarElemento() {
   const id = document.getElementById("id").value;
-
-  // Filtra la lista para eliminar el elemento correspondiente
   listaElementos = listaElementos.filter((elemento) => elemento.id !== id);
   actualizarFormDatos();
 }
